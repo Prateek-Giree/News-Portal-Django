@@ -73,6 +73,7 @@ li {
 /* STICKY NAVBAR  */
 
 header.sticky {
+  z-index: 1;
   position: fixed;
   top: 0;
   transition: 0.5s;

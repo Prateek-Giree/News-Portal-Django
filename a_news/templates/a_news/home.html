@@ -1,4 +1,84 @@
-{% extends "base.html" %} {% block title %} Home {% endblock %} {% block body %}
-<h1>Home</h1>
+{% extends "base.html" %} {% load static %} {% block title %} Home 
+{% endblock %} {% block body %}
+<section class="main">
+  <div class="news-section">
+    <div class="recent">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas atque qui,
+      animi labore modi deserunt placeat necessitatibus magni dolore, dolores
+      illo ut. Voluptatibus neque deleniti eos voluptatum ab quo sunt optio
+      ducimus id eius magnam cum rem, cupiditate quaerat, numquam ea beatae,
+      ipsum excepturi quos. Aliquam recusandae corporis eligendi praesentium.
+    </div>
+    <h2>Capital</h2>
 
+    <div class="news-grid">
+      <div class="news-item">
+        <a href="">
+          <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+          <h3>News Title 1</h3>
+          <p>by Author 1 | July 19, 2024</p>
+          <p>Summary of news 1...</p>
+        </a>
+      </div>
+
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 2</h3>
+        <p>by Author 2 | July 19, 2024</p>
+        <p>Summary of news 2...</p>
+        <a href="#">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 3</h3>
+        <p>by Author 3 | July 19, 2024</p>
+        <p>Summary of news 3...</p>
+        <a href="#">Read more</a>
+      </div>
+
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 4</h3>
+        <p>by Author 4 | July 19, 2024</p>
+        <p>Summary of news 4...</p>
+        <a href="#">Read more</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-section">
+    <h2>Nation</h2>
+    <div class="news-grid">
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 5</h3>
+        <p>by Author 5 | July 19, 2024</p>
+        <p>Summary of news 5...</p>
+        <a href="#">Read more</a>
+      </div>
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 6</h3>
+        <p>by Author 6 | July 19, 2024</p>
+        <p>Summary of news 6...</p>
+        <a href="#">Read more</a>
+      </div>
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 7</h3>
+        <p>by Author 7 | July 19, 2024</p>
+        <p>Summary of news 7...</p>
+        <a href="#">Read more</a>
+      </div>
+      <div class="news-item">
+        <img src='{% static "image/modi.jpg" %}' alt="News Title 1" />
+        <h3>News Title 8</h3>
+        <p>by Author 8 | July 19, 2024</p>
+        <p>Summary of news 8...</p>
+        <a href="#">Read more</a>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

@@ -17,15 +17,14 @@
       href="{% static 'assets/favicon.ico' %}"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="{% static 'css/news.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
     {% include "navbar.html" %} {% block body %}
     <!-- Default content can go here -->
-    {% endblock %}
-
-    {% include "footer.html" %}
+    {% endblock %} {% include "footer.html" %}
     <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>
