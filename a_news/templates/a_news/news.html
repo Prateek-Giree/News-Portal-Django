@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+<div class="container">
+  <div class="news-container">
+    <div class="news-header">
+      <h1>{{ news.title }}</h1>
+      <div class="news-meta">
+        <span>Author: {{ news.author }} </span>
+        <span>Published on: {{ news.date|date }} </span>
+      </div>
+    </div>
+    <div class="image">
+      <img src="{{ news.image.url }}" alt="News Image" />
+    </div>
+
+    <div class="news-content">
+      <p>{{ news.content }}</p>
+    </div>
+    <div class="additional-news">
+      <h3>Additional News: {{ news.category }}</h3>
+      <ul>
+        {% for samachar in all_news %} {% if samachar.category == news.category %}
+        <li>
+          <a href=" {% url "news" samachar.id %} ">
+            <img
+              src=" {{ samachar.image.url }} "
+              alt="additional-news"
+              style="width: 200px; height: 200px"
+            />
+            <p>{{ samachar.title }}</p>
+          </a>
+        </li>
+        {% endif %} {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock body %}
