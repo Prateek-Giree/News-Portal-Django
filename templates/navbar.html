@@ -1,24 +1,51 @@
 <section class="Main">
   <div class="logo">
-    <a href=" {% url "home" %} ">News<span>Nepal</span></a>
+    <a href=' {% url "home" %} '>News<span>Nepal</span></a>
     <div class="login">
-      <a href="#"><i class="fa-solid fa-user"></i> Login</a>
+      <a href=" {% url "login" %} "><i class="fa-solid fa-user"></i> Login</a>
     </div>
   </div>
   <hr />
   <header>
     <!-- NAVBAR  -->
     <nav class="navbar">
+      {% if page == 'home' %}
       <ul class="links">
-        <li><a href="#">Capital</a></li>
-        <li><a href="#about">Nation</a></li>
-        <li><a href="#contact">Politics</a></li>
-        <li><a href="">Global</a></li>
-        <li><a href="">Stock</a></li>
-        <li><a href="">Sports</a></li>
-        <li><a href="">Science &amp; tech</a></li>
-        <li><a href="">Weather</a></li>
+        <li><a href="#capital">Capital</a></li>
+        <li><a href="#nation">Nation</a></li>
+        <li><a href="#politics">Politics</a></li>
+        <li><a href="#global">Global</a></li>
+        <li><a href="#stock">Stock</a></li>
+        <li><a href="#sports">Sports</a></li>
+        <li><a href="#science_tech">Science &amp; tech</a></li>
+        <li><a href="#weather">Weather</a></li>
+        <li>
+          <form method="GET" action="" class="search">
+            <label>
+              <input type="search" name="q" placeholder="Search " />
+            </label>
+          </form>
+        </li>
       </ul>
+      {% else %}
+      <ul class="links">
+        <li><a href=" {% url 'newsByCategory' 'capital' %} ">Capital</a></li>
+        <li><a href="{% url 'newsByCategory' 'nation' %}">Nation</a></li>
+        <li><a href="{% url 'newsByCategory' 'politics' %}">Politics</a></li>
+        <li><a href="{% url 'newsByCategory' 'global' %}">Global</a></li>
+        <li><a href="{% url 'newsByCategory' 'stock' %}">Stock</a></li>
+        <li><a href="{% url 'newsByCategory' 'sports' %}">Sports</a></li>
+        <li><a href="{% url 'newsByCategory' 'science_tech' %}">Science &amp; tech</a></li>
+        <li><a href="{% url 'newsByCategory' 'weather' %}">Weather</a></li>
+        <li>
+          <form method="GET" action="" class="search">
+            <label>
+              <input type="search" name="q" placeholder="Search " />
+            </label>
+          </form>
+        </li>
+      </ul>
+      {% endif %}
     </nav>
   </header>
 </section>

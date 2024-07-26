@@ -1,10 +1,42 @@
-{% extends "base.html" %} {% load static %} {% block title %} Home 
-{% endblock %} {% block body %}
+{% extends "base.html" %} {% load static %} {% block title %} Home
+ {% endblock %} {% block body %}
+<div class="slider">
+  <!-- list Items -->
+  {% for recent in recent_news %}
+  <div class="list">
+    <div class="item {% if forloop.first %}active{% endif %}">
+      <img src="{{ recent.image.url }}" alt="{{ recent.title }}" />
+      <div class="content">
+        <p>{{ recent.category }}</p>
+        <a href="{% url 'news' recent.id %}">
+          <h2>{{ recent.title }}</h2>
+        </a>
+        <p>{{ recent.author }} | {{ recent.published_date|date:"F j, Y" }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- button arrows -->
+  <div class="arrows">
+    <button id="prev"><</button>
+    <button id="next">></button>
+  </div>
+  <!-- thumbnail -->
+  <div class="thumbnail">
+    {% for recent in recent_news %}
+    <a href=" {% url 'news' recent.id %} ">
+      <div class="item {% if forloop.first %}active{% endif %}">
+        <img src="{{ recent.image.url }}" alt="{{ recent.title }}" />
+        <div class="content">{{ recent.author }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
 
 <section class="main">
   {% for category, news_list in news_by_category.items %} {% if news_list %}
-
-  <div class="news-section">
+  <div class="news-section" id="{{ category }}">
     <h2>{{ category|title }}</h2>
     <div class="news-grid">
       {% for news in news_list %}
@@ -16,7 +48,7 @@
             style="width: 400px; height: 300px"
           />
           <h3>{{ news.title }}</h3>
-          <p>{{ news.author }} | {{ news.date|timesince }} ago</p>
+          <p>{{ news.author }} | {{ news.published_date|timesince }} ago</p>
         </a>
       </div>
       {% endfor %}

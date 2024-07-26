@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% load static %} {% block body %}
+{% extends "base.html" %} {% load static %}
+{% block title %}
+{{ news.title }}
+{% endblock title %}
+{% block body %}
 <div class="container">
   <div class="news-container">
     <div class="news-header">

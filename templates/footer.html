@@ -5,16 +5,33 @@
     </div>
     <div class="nav">
       <h1>Navigation</h1>
+      {% if page == 'home' %}
       <ul class="footernav">
-        <li><a href="#">Capital</a></li>
-        <li><a href="#about">Nation</a></li>
-        <li><a href="#contact">Politics</a></li>
-        <li><a href="">Global</a></li>
-        <li><a href="">Stock</a></li>
-        <li><a href="">Sports</a></li>
-        <li><a href="">Science &amp; tech</a></li>
-        <li><a href="">Weather</a></li>
+        <li><a href="#capital">Capital</a></li>
+        <li><a href="#nation">Nation</a></li>
+        <li><a href="#politics">Politics</a></li>
+        <li><a href="#global">Global</a></li>
+        <li><a href="#stock">Stock</a></li>
+        <li><a href="#sports">Sports</a></li>
+        <li><a href="#science_tech">Science &amp; tech</a></li>
+        <li><a href="#weather">Weather</a></li>
       </ul>
+      {% else %}
+      <ul class="footernav">
+        <li><a href="{% url 'newsByCategory' 'capital' %}">Capital</a></li>
+        <li><a href="{% url 'newsByCategory' 'nation' %}">Nation</a></li>
+        <li><a href="{% url 'newsByCategory' 'politics' %}">Politics</a></li>
+        <li><a href="{% url 'newsByCategory' 'global' %}">Global</a></li>
+        <li><a href="{% url 'newsByCategory' 'stock' %}">Stock</a></li>
+        <li><a href="{% url 'newsByCategory' 'sports' %}">Sports</a></li>
+        <li>
+          <a href="{% url 'newsByCategory' 'science_tech' %}"
+            >Science &amp; tech</a
+          >
+        </li>
+        <li><a href="{% url 'newsByCategory' 'weather' %}">Weather</a></li>
+      </ul>
+      {% endif %}
     </div>
     <div class="footercontact">
       <h1>Contact</h1>
