@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import News
+from .models import News, User
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
@@ -43,12 +44,12 @@ def newsByCategory(request, category):
     }
     return render(request, 'a_news/category.html', context)
 
-
 def loginView(request):
+
     # if user is already logged in then redirect to home. Prevent relogin
     if request.user.is_authenticated:
-        return redirect("home")
-    
+        return redirect("postnews")
+
     if request.method == 'POST':
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
@@ -58,18 +59,51 @@ def loginView(request):
 
             if user is not None:
                 login(request, user)  # create session
-                return redirect("home")
+                return redirect("postnews")
             else:
                 messages.error(request, "Username or password does not match")
         except User.DoesNotExist:
             messages.error(request, "User does not exist")
-
-    page = 'login'
+    
+    #to render login form
+    page='RenderLogin'
     context = {
-        'page': page,
+        'page':page,
     }
     return render(request, 'form.html', context)
 
 
 def register(request):
+
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        cpassword = request.POST.get("cpassword")
+
+        if password != cpassword:
+            messages.error(request, "Password do not match.")
+        
+        else:
+            # Check if the email is already registered
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "Email is already registered.")
+            else:
+                # Create a new user with the form information
+                user = User(
+                    name=name,
+                    email=email,
+                    password=make_password(password),
+                )
+                user.save()
+                messages.success(request, "User registered successfully.")
+                return redirect("login")
+
     return render(request, 'form.html')
+
+@login_required(login_url='login')
+def postNews(request):
+    return render(request,'a_news/postnews.html')
+
+
+

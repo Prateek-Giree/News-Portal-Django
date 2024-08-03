@@ -16,10 +16,10 @@
 
 
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-    {% if page == 'login' %}
+    {% if page == 'RenderLogin' %}
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Sign in to your account
+        Please login to continue
       </h2>
     </div>
 
@@ -56,6 +56,8 @@
         <a href=" {% url "register" %} "
             class=" font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Signup here</a>
       </p>
+
+
       {% else %}
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -64,8 +66,8 @@
       </div>
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
-
+        <form class="space-y-6" action=" {% url "register" %} " method="POST">
+          {% csrf_token %}
           <div>
             <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Full Name</label>
             <div class="mt-2">
@@ -111,7 +113,7 @@
         </form>
         <p class="mt-10 text-center text-sm text-gray-500">
           Already have account?
-          <a href=" {% url " login" %} "
+          <a href=" {% url "login" %} "
             class=" font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login here</a>
         </p>
         {% endif %}

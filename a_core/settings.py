@@ -45,6 +45,8 @@ EXTERNAL_APP = [
 
 INSTALLED_APPS += EXTERNAL_APP
 
+AUTH_USER_MODEL = "a_news.User"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
