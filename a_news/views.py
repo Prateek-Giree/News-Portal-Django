@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import News, User
 from django.contrib.auth.hashers import make_password
+from django.utils import timezone
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -103,7 +106,43 @@ def register(request):
 
 @login_required(login_url='login')
 def postNews(request):
-    return render(request,'a_news/postnews.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        category = request.POST.get('category')
+        image = request.FILES.get('image')
+        content = request.POST.get('content')
+        author = request.user
+        published_date = timezone.now()
+
+        if title and category and image and content:
+            # Save the image file
+            fs = FileSystemStorage(location=settings.MEDIA_ROOT)
+            filename = fs.save(image.name, image)
+            image_url = fs.url(filename)
+
+            # Create a new News instance
+            news = News(
+                title=title,
+                category=category,
+                image=image_url,
+                content=content,
+                author=author,
+                published_date=published_date
+            )
+            news.save()
+            messages.success(request, "News posted successfully.")
+            return redirect("home")
+    
+    categories = ['capital', 'nation', 'politics', 'global',
+                  'stock', 'sports', 'science_tech', 'weather']
+    category_list = {category: News.objects.filter(
+        category=category) for category in categories}
+    
+    context={
+        'category_list':category_list,
+        'user':request.user.name
+    }
+    return render(request,'a_news/postnews.html',context)
 
 
 
