@@ -1,5 +1,33 @@
-{% extends "base.html" %} {% block title %} {{category}} News 
+{% extends "base.html" %} {% load static %} {% block title %} NewsNepal | {{category}} News
 {% endblock title %} {% block body %}
-<h1>News according to category</h1>
-<p>{{ category }}</p>
+
+<div class="MainContainer">
+  <div class="Container">
+    <h1>{{category}} News</h1>
+    <hr />
+    <div class="Grid">
+      <!-- Hardcoded News Item 1 -->
+      {% for news in newss %}
+      <div class="NewsItem">
+        <div class="NewsImage">
+          <img src=" {{ news.image.url }} " alt="News Image 1" />
+        </div>
+        <div class="NewsContent">
+          <a href="">
+            <div class="NewsTitle">{{ news.title }}</div>
+            <div class="NewsMeta">
+              Author: {{ news.author.name }} | Published on: {{
+              news.published_date|date:"F j, Y" }}
+            </div>
+            <div class="NewsDescription">
+              {{ news.content|slice:":100" }} .....
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- Hardcoded News Item 2 -->
+    </div>
+  </div>
+</div>
 {% endblock body %}

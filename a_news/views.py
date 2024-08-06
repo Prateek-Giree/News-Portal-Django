@@ -40,9 +40,9 @@ def news(request, pk):
 
 
 def newsByCategory(request, category):
-    news = News.objects.filter(category=category)
+    newss = News.objects.filter(category=category)
     context = {
-        'news': news,
+        'newss': newss,
         'category':  category.capitalize(),
     }
     return render(request, 'a_news/category.html', context)
@@ -118,13 +118,10 @@ def postNews(request):
             # Save the image file
             fs = FileSystemStorage(location=settings.MEDIA_ROOT)
             filename = fs.save(image.name, image)
-            image_url = fs.url(filename)
-
-            # Create a new News instance
             news = News(
                 title=title,
                 category=category,
-                image=image_url,
+                image=filename,  # Save the relative path in the database
                 content=content,
                 author=author,
                 published_date=published_date
@@ -133,16 +130,11 @@ def postNews(request):
             messages.success(request, "News posted successfully.")
             return redirect("home")
     
-    categories = ['capital', 'nation', 'politics', 'global',
-                  'stock', 'sports', 'science_tech', 'weather']
-    category_list = {category: News.objects.filter(
-        category=category) for category in categories}
+    categories = ['capital', 'nation', 'politics', 'global', 'stock', 'sports', 'science_tech', 'weather']
+    category_list = {category: News.objects.filter(category=category) for category in categories}
     
-    context={
-        'category_list':category_list,
-        'user':request.user.name
+    context = {
+        'category_list': category_list,
+        'user': request.user.name
     }
-    return render(request,'a_news/postnews.html',context)
-
-
-
+    return render(request, 'a_news/postnews.html', context)
