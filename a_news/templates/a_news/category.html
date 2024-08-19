@@ -6,27 +6,25 @@
     <h1>{{category}} News</h1>
     <hr />
     <div class="Grid">
-      <!-- Hardcoded News Item 1 -->
       {% for news in newss %}
+      <a href="{% url "news" news.id %} ">
       <div class="NewsItem">
         <div class="NewsImage">
           <img src=" {{ news.image.url }} " alt="News Image 1" />
         </div>
         <div class="NewsContent">
-          <a href="">
             <div class="NewsTitle">{{ news.title }}</div>
             <div class="NewsMeta">
-              Author: {{ news.author.name }} | Published on: {{
-              news.published_date|date:"F j, Y" }}
+              Author: {{ news.author.name }} | Published on: 
+              {{ news.published_date|date:"F j, Y" }}
             </div>
             <div class="NewsDescription">
               {{ news.content|slice:":100" }} .....
             </div>
-          </a>
+          </div>
         </div>
-      </div>
+      </a>
       {% endfor %}
-      <!-- Hardcoded News Item 2 -->
     </div>
   </div>
 </div>

@@ -229,11 +229,11 @@ body {
 .NewsContent {
   padding: 15px;
 }
-.NewsContent a {
+.Grid a {
   text-decoration: none;
   color: #333;
 }
-.NewsContent a:hover {
+.Grid a:hover {
   color: black;
 }
 .NewsTitle {
